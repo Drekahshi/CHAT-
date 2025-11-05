@@ -65,7 +65,7 @@ CHAT aspires to create a decentralized, tokenized cultural database that serves 
    - **AI-Powered Metadata**: Automates language detection, tagging, geographic attribution, and provenance.
    - **Hybrid Storage**: IPFS for primary decentralized storage, Arweave for backups, and Polygon/Ethereum for metadata.
 
-2. **Economic Marketplace**
+2. **Economic Marketplace NFT DEX INTEGRATION **
    - **NFT Minting and Trading**: Verified assets tokenized as ERC-1155 fractional NFTs.
    - **Royalty Automation**: 70% to creators, 20% to conservation, 10% to platform.
    - **Tiered Licensing**: Individual ($0.50–$2), Commercial ($20–$150), Institutional ($500–$5,000/year).
