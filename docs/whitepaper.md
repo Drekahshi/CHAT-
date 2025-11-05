@@ -184,18 +184,18 @@ Public Access (Free Educational + Paid Licensing)
 #### Phase 1: Foundation (Months 1–3)
 - Technical: Deploy contracts, train AI, build MVP.
 - Community: Recruit ambassadors, establish councils, curate 500+ assets.
-- Pilot: Beta in Kenya and Ghana.
-- Milestones: 500 assets, 5 partnerships, $50K fund, 10K testers.
+- Pilot: Beta in Kenya  Kakapel National Monument .
+- Milestones: 500 assets, 5 partnerships, 10K testers.
 
 #### Phase 2: Expansion (Months 4–9)
-- Scaling: Add Nigeria, South Africa, Uganda, Senegal.
+- Scaling:  Uganda.
 - Enhancements: AI languages, marketplace UI, mobile apps, AR/VR prototypes.
-- Milestones: 5,000 assets, 15+ partnerships, $500K fund, 50K users.
+- Milestones: 5,000 assets, 15+ partnerships, 50K users.
 
 #### Phase 3: Scale (Months 10–24)
 - Maturation: Bridges, APIs, AR/VR live.
 - Expansion: 10+ countries, diaspora activation, tourism ties.
-- Milestones: 50,000+ assets, $2M fund, 100K users, 20 integrations.
+- Milestones: 50,000+ assets, 100K users, 20 integrations.
 
 #### Phase 4: Global (Months 25+)
 - Reach: Diaspora, international museums, metaverse.
@@ -284,20 +284,11 @@ Public Access (Free Educational + Paid Licensing)
 - **Community**: Narrative control, pride, intergenerational transfer.
 - **Global**: Diaspora connections, education, SDG alignment (poverty, preservation, equality).
 
-### Enhancements to the Draft
-To elevate this whitepaper, I recommend incorporating a **Team and Advisors Section** to build credibility, as investors often seek experienced leadership. For example:
 
-#### Team and Advisors
-- **Founders**: Seasoned Web3 developers and cultural anthropologists with 10+ years in blockchain and African heritage projects.
-- **Advisory Board**: Includes UNESCO representatives, African museum directors, and blockchain experts from Polygon and Ethereum foundations.
-- **Core Contributors**: Multidisciplinary team of 20, including AI specialists, community organizers, and legal experts in IP and FPIC.
 
-Additionally, add a **Funding and Investment Ask** section to attract partners:
 
 #### Funding and Investment Opportunities
-CHAT seeks $5M in seed funding to accelerate Phase 1 development, ambassador programs, and pilot launches. In return, investors receive equity-equivalent tokens from the Advisors/Partners allocation, with vesting aligned to milestones. This investment not only yields financial returns but advances global cultural equity.
-
-Finally, integrate real-time metrics or partnerships updates via a dynamic website link, and consider appending case studies of pilot successes post-launch.
+CHAT seeks collaborations  to accelerate Phase 1 development, ambassador programs, and pilot launches. In return, investors receive equity-equivalent tokens from the Advisors/Partners allocation, with vesting aligned to milestones.
 
 ### Call to Action
 CHAT calls on African stakeholders and the global diaspora to co-build this decentralized platform.
@@ -307,6 +298,5 @@ CHAT calls on African stakeholders and the global diaspora to co-build this dece
 - **Developers**: Build via API/SDK, join grants.
 - **Investors**: Support preservation in a high-growth market.
 
-For inquiries: [www.chat-culture.io] or partnerships@chat-culture.io.
 
 © 2025 CHAT Foundation. Community-owned and operated.
