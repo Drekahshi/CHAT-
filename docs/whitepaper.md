@@ -38,7 +38,7 @@ CHAT aspires to create a decentralized, tokenized cultural database that serves 
 #### Heritage Disappearance
 - **Oral Traditions Lost Daily**: Without digital infrastructure, stories, songs, and knowledge systems fade with each generation.
 - **Language Extinction Crisis**: Over 2,000 indigenous languages are endangered, eroding cultural identities.
-- **Physical Site Degradation**: Climate change, urbanization, and neglect endanger sites like Kenya's Kakapel rock art.
+- **Physical Site Degradation**: Climate change, urbanization, and  endanger sites like Kenya's Kakapel rock art.
 - **Undocumented Crafts**: Traditional skills in weaving, metalwork, and pottery decline as youth pursue other livelihoods.
 
 #### Cultural Exploitation
