@@ -1,0 +1,182 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Creator {
+  id      String   @id @default(uuid())
+  address String   @unique
+  assets  Asset[]
+  listings MarketplaceListing[]
+  sales   SalesTransaction[] @relation("seller")
+
+  @@map("creators")
+}
+
+model Collector {
+  id    String @id @default(uuid())
+  address String @unique
+  sales SalesTransaction[]
+
+  @@map("collectors")
+}
+
+model Asset {
+  id                          String    @id @default(uuid())
+  creatorId                   String
+  title                       String
+  description                 String?
+  assetType                   AssetType
+  ipfsHash                    String
+  metadataUri                 String
+  status                      AssetStatus @default(submitted)
+  aiVerificationResult        Json?
+  hederaAttestationId         String?
+  hederaConsensusTimestamp    DateTime?
+  ethereumContractAddress     String?
+  ethereumTokenId             BigInt?
+  accessLevel                 AccessLevel
+  genderSpecificAccess        String?
+  attributes                  Json?
+  language                    String?
+  region                      String?
+  createdAt                   DateTime  @default(now())
+  updatedAt                   DateTime  @updatedAt
+  creator                     Creator   @relation(fields: [creatorId], references: [id])
+  marketplaceListings         MarketplaceListing[]
+  conservationFundLocks       ConservationFundLock[]
+
+  @@index([creatorId])
+  @@index([status])
+  @@index([assetType])
+  @@map("assets")
+}
+
+model MarketplaceListing {
+  id                  String        @id @default(uuid())
+  assetId             String
+  sellerId            String
+  individualPrice     Decimal?
+  commercialPrice     Decimal?
+  institutionalPrice  Decimal?
+  listingStatus       ListingStatus
+  createdAt           DateTime?
+  delistedAt          DateTime?
+  soldAt              DateTime?
+  asset               Asset         @relation(fields: [assetId], references: [id])
+  seller              Creator       @relation(fields: [sellerId], references: [id])
+  salesTransactions   SalesTransaction[]
+
+  @@index([assetId])
+  @@index([sellerId])
+  @@index([listingStatus])
+  @@map("marketplace_listings")
+}
+
+model SalesTransaction {
+  id                  String        @id @default(uuid())
+  listingId           String
+  buyerId             String
+  sellerId            String
+  salePrice           Decimal?
+  platformFee         Decimal?
+  creatorRoyalty      Decimal?
+  sellerProceeds      Decimal?
+  ethereumTxHash      String?
+  ethereumBlockNumber BigInt?
+  hederaAttestationId String?
+  saleTimestamp       DateTime?
+  listing             MarketplaceListing @relation(fields: [listingId], references: [id])
+  buyer               Collector     @relation(fields: [buyerId], references: [id])
+  seller              Creator       @relation("seller", fields: [sellerId], references: [id])
+  conservationFundLocks ConservationFundLock[]
+
+  @@index([buyerId])
+  @@index([sellerId])
+  @@index([ethereumTxHash])
+  @@map("sales_transactions")
+}
+
+model ConservationFundLock {
+  id                  String   @id @default(uuid())
+  assetId             String
+  saleId              String
+  lockedAmount        Decimal?
+  lockTimestamp       DateTime
+  unlockTimestamp     DateTime
+  apyPercentage       Decimal? @default(12.00)
+  accruedYield        Decimal? @default(0)
+  status              LockStatus
+  asset               Asset    @relation(fields: [assetId], references: [id])
+  sale                SalesTransaction @relation(fields: [saleId], references: [id])
+
+  @@index([assetId])
+  @@index([unlockTimestamp])
+  @@map("conservation_fund_locks")
+}
+
+model Validator {
+  id                  String        @id @default(uuid())
+  validatorAddress    String
+  validatorType       ValidatorType
+  stakedAmount        Decimal
+  slashedAmount       Decimal?      @default(0)
+  approvalsCount      BigInt?       @default(0)
+  rejectionsCount     BigInt?       @default(0)
+  slashIncidents      BigInt?       @default(0)
+  active              Boolean?      @default(true)
+  electedAt           DateTime?
+  electionExpiresAt   DateTime?
+
+  @@index([active])
+  @@index([electionExpiresAt])
+  @@map("validators")
+}
+
+enum AssetType {
+  art
+  music
+  craft
+  story
+  ritual
+}
+
+enum AssetStatus {
+  submitted
+  ai_reviewing
+  validator_reviewing
+  approved
+  rejected
+  minted
+}
+
+enum AccessLevel {
+  public
+  restricted
+  sacred
+}
+
+enum ListingStatus {
+  active
+  sold
+  cancelled
+}
+
+enum LockStatus {
+  locked
+  unlocked
+  allocated
+  distributed
+}
+
+enum ValidatorType {
+  elder
+  historian
+  linguist
+  curator
+  community_leader
+}
