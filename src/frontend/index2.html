@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHAT: Cultural Heritage Asset Token</title>
+    <style>
+        :root {
+            --primary: #1a5276;
+            --secondary: #f39c12;
+            --accent: #e74c3c;
+            --light: #f8f9fa;
+            --dark: #2c3e50;
+            --success: #27ae60;
+            --gray: #95a5a6;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--dark));
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.1)"/></svg>');
+            background-size: cover;
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background-color: var(--secondary);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .cta-button:hover {
+            background-color: #e67e22;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        /* Navigation */
+        nav {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 2rem;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Section Styles */
+        section {
+            padding: 5rem 0;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-header h2 {
+            font-size: 2.2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-header h2::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--secondary);
+        }
+        
+        .section-header p {
+            max-width: 700px;
+            margin: 0 auto;
+            color: var(--gray);
+        }
+        
+        /* Executive Summary */
+        .executive-summary {
+            background-color: white;
+            border-radius: 10px;
+            padding: 3rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-bottom: 3rem;
+        }
+        
+        .problem-solution-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .problem-box, .solution-box {
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+        }
+        
+        .problem-box {
+            background-color: #fff5f5;
+            border-left: 4px solid var(--accent);
+        }
+        
+        .solution-box {
+            background-color: #f0f9ff;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .problem-box h3, .solution-box h3 {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .problem-box h3::before {
+            content: "⚠️";
+            margin-right: 10px;
+        }
+        
+        .solution-box h3::before {
+            content: "💡";
+            margin-right: 10px;
+        }
+        
+        /* Technical Architecture */
+        .architecture-diagram {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .multi-chain {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+        }
+        
+        .chain {
+            flex: 1;
+            text-align: center;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 0 10px;
+            background-color: white;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+        }
+        
+        .chain.hedera {
+            border-top: 4px solid #5dade2;
+        }
+        
+        .chain.ethereum {
+            border-top: 4px solid #8e44ad;
+        }
+        
+        .chain.polygon {
+            border-top: 4px solid #8247e5;
+        }
+        
+        .chain-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* Tokenomics */
+        .token-distribution {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .token-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+        
+        .token-card h4 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        .token-percentage {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+        
+        /* SDG Alignment */
+        .sdg-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .sdg-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            border-left: 4px solid var(--success);
+        }
+        
+        .sdg-card h4 {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .sdg-card h4::before {
+            content: "🎯";
+            margin-right: 10px;
+        }
+        
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background-color: white;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #e1e1e1;
+        }
+        
+        th {
+            background-color: var(--primary);
+            color: white;
+            font-weight: 600;
+        }
+        
+        tr:last-child td {
+            border-bottom: none;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 4rem 0 2rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-section h3::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--secondary);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--secondary);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+            
+            .problem-solution-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .multi-chain {
+                flex-direction: column;
+            }
+            
+            .chain {
+                margin: 10px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <h1 class="logo">CHAT</h1>
+            <p class="tagline">Cultural Heritage Asset Token - Bringing Africa's Cultural Heritage to Life</p>
+            <p>Preserving, protecting, monetizing, and celebrating African cultural assets through blockchain technology</p>
+            <a href="#vision" class="cta-button">Explore Our Vision</a>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="container nav-container">
+            <div class="logo">CHAT</div>
+            <ul class="nav-links">
+                <li><a href="#vision">Vision & Values</a></li>
+                <li><a href="#architecture">Technical Architecture</a></li>
+                <li><a href="#tokenomics">Tokenomics</a></li>
+                <li><a href="#revenue">Revenue Model</a></li>
+                <li><a href="#sdg">SDG Alignment</a></li>
+                <li><a href="#roadmap">Roadmap</a></li>
+            </ul>
+            <div class="mobile-menu">☰</div>
+        </div>
+    </nav>
+
+    <!-- Executive Summary Section -->
+    <section id="executive-summary">
+        <div class="container">
+            <div class="section-header">
+                <h2>Executive Summary</h2>
+                <p>CHAT is Africa's first decentralized cultural heritage NFT marketplace designed to preserve, protect, monetize, and celebrate African cultural assets while directly empowering creators, communities, and conservationists.</p>
+            </div>
+            
+            <div class="executive-summary">
+                <div class="problem-solution-grid">
+                    <div class="problem-box">
+                        <h3>The Problem We Solve</h3>
+                        <ul>
+                            <li>Over 2,000 indigenous African languages face extinction</li>
+                            <li>Oral traditions, crafts, and rituals disappear with each generation</li>
+                            <li>African cultural value estimated at $3+ billion globally captures less than 5% for source communities</li>
+                            <li>Centralized institutions control narratives and benefit disproportionately</li>
+                            <li>No unified platform for creators to earn sustainable income from cultural assets</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="solution-box">
+                        <h3>Our Unique Solution</h3>
+                        <ul>
+                            <li><strong>Creator-First Economics:</strong> 70% royalty distribution (vs 50% on OpenSea)</li>
+                            <li><strong>Immutable Preservation:</strong> Assets timestamped on green Hedera blockchain</li>
+                            <li><strong>Community Governance:</strong> DOVU guardians and elected validator councils authenticate</li>
+                            <li><strong>Cross-Chain Accessibility:</strong> Create on Hedera, trade on Ethereum, scale on Polygon</li>
+                            <li><strong>Perpetual Conservation:</strong> 20% of all royalties locked in conservation fund</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vision & Values Section -->
+    <section id="vision" style="background-color: #f8f9fa;">
+        <div class="container">
+            <div class="section-header">
+                <h2>Platform Vision & Values</h2>
+                <p>How Africa can reclaim its cultural narrative and economic value</p>
+            </div>
+            
+            <div class="values-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+                <div class="value-card" style="background-color: white; padding: 2rem; border-radius: 8px; box-shadow: 0 3px 10px rgba(0,0,0,0.08);">
+                    <h3 style="color: var(--primary); margin-bottom: 1rem;">Creator Empowerment</h3>
+                    <p>Creators own their assets, not the platform. 70% of revenue goes to origin with long-term 5% perpetual royalties.</p>
+                </div>
+                
+                <div class="value-card" style="background-color: white; padding: 2rem; border-radius: 8px; box-shadow: 0 3px 10px rgba(0,0,0,0.08);">
+                    <h3 style="color: var(--primary); margin-bottom: 1rem;">Sacred Knowledge Protection</h3>
+                    <p>Communities decide access levels with zero-knowledge proofs for restricted content. Ceremony and ritual protected by default.</p>
+                </div>
+                
+                <div class="value-card" style="background-color: white; padding: 2rem; border-radius: 8px; box-shadow: 0 3px 10px rgba(0,0,0,0.08);">
+                    <h3 style="color: var(--primary); margin-bottom: 1rem;">Environmental Stewardship</h3>
+                    <p>Built on Hedera (green DLT), Ethereum main chain, and Polygon scaling with combined carbon footprint &lt;1% of Bitcoin network.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Architecture Section -->
+    <section id="architecture">
+        <div class="container">
+            <div class="section-header">
+                <h2>Technical Architecture</h2>
+                <p>Multi-chain strategy for optimal performance, security, and accessibility</p>
+            </div>
+            
+            <div class="architecture-diagram">
+                <h3 style="text-align: center; margin-bottom: 2rem; color: var(--primary);">Multi-Chain Strategy</h3>
+                
+                <div class="multi-chain">
+                    <div class="chain hedera">
+                        <div class="chain-icon">🌿</div>
+                        <h4>Hedera</h4>
+                        <p><strong>Role:</strong> Creation & Timestamping</p>
+                        <p><strong>Benefits:</strong> Green (PoS), Low Cost ($0.001/tx), Immutable</p>
+                    </div>
+                    
+                    <div class="chain ethereum">
+                        <div class="chain-icon">⛓️</div>
+                        <h4>Ethereum</h4>
+                        <p><strong>Role:</strong> Primary Marketplace</p>
+                        <p><strong>Benefits:</strong> Security, Liquidity, Standards</p>
+                    </div>
+                    
+                    <div class="chain polygon">
+                        <div class="chain-icon">🚀</div>
+                        <h4>Polygon</h4>
+                        <p><strong>Role:</strong> Scaling Layer</p>
+                        <p><strong>Benefits:</strong> Cost Efficiency, Speed, EVM-Compatible</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="background-color: white; padding: 2rem; border-radius: 8px; margin-top: 2rem; box-shadow: 0 3px 10px rgba(0,0,0,0.08);">
+                <h3 style="color: var(--primary); margin-bottom: 1rem;">Asset Creation Pipeline</h3>
+                <ol style="padding-left: 1.5rem;">
+                    <li><strong>Asset Submission:</strong> Creator uploads cultural asset with metadata</li>
+                    <li><strong>AI Hybrid Verification:</strong> Automated screening using Whisper, Vision Transformer, and CLIP models</li>
+                    <li><strong>Validator Council Review:</strong> DOVU guardians and local experts authenticate assets</li>
+                    <li><strong>Hedera Timestamping:</strong> Immutable proof of creation recorded</li>
+                    <li><strong>Ethereum Minting:</strong> ERC-1155 NFT minted with embedded royalty configuration</li>
+                    <li><strong>Marketplace Listing:</strong> Asset available for purchase across pricing tiers</li>
+                </ol>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tokenomics Section -->
+    <section id="tokenomics" style="background-color: #f8f9fa;">
+        <div class="container">
+            <div class="section-header">
+                <h2>CHAT Token Economics</h2>
+                <p>3 Billion supply with yield-generating locked investments</p>
+            </div>
+            
+            <div class="token-distribution">
+                <div class="token-card">
+                    <div class="token-percentage">33.3%</div>
+                    <h4>Immediate Distribution</h4>
+                    <p>1B CHAT for active marketplace circulation</p>
+                </div>
+                
+                <div class="token-card">
+                    <div class="token-percentage">66.7%</div>
+                    <h4>Locked Yield Investments</h4>
+                    <p>2B CHAT generating $1.2B+ returns over 3-7 years</p>
+                </div>
+            </div>
+            
+            <div style="background-color: white; padding: 2rem; border-radius: 8px; margin-top: 2rem; box-shadow: 0 3px 10px rgba(0,0,0,0.08);">
+                <h3 style="color: var(--primary); margin-bottom: 1rem;">Initial Distribution (1 Billion CHAT)</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Allocation</th>
+                            <th>Percentage</th>
+                            <th>Purpose</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Community Rewards Fund</td>
+                            <td>350M</td>
+                            <td>35%</td>
+                            <td>Airdrops, ambassadors, ecosystem incentives</td>
+                        </tr>
+                        <tr>
+                            <td>DAO Treasury</td>
+                            <td>250M</td>
+                            <td>25%</td>
+                            <td>Governance, partnerships, operations</td>
+                        </tr>
+                        <tr>
+                            <td>DEX Liquidity Bootstrap</td>
+                            <td>200M</td>
+                            <td>20%</td>
+                            <td>Uniswap/QuickSwap liquidity pools</td>
+                        </tr>
+                        <tr>
+                            <td>Team & Operations</td>
+                            <td>100M</td>
+                            <td>10%</td>
+                            <td>Salaries, infrastructure, operational continuity</td>
+                        </tr>
+                        <tr>
+                            <td>Strategic Advisors</td>
+                            <td>100M</td>
+                            <td>10%</td>
+                            <td>Early supporters, institutional advisors</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Revenue Model Section -->
+    <section id="revenue">
+        <div class="container">
+            <div class="section-header">
+                <h2>Revenue Model & Sustainability</h2>
+                <p>Multiple revenue streams supporting long-term platform viability</p>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+                <div style="background-color: white; padding: 2rem; border-radius: 8px; box-shadow: 0 3px 10px rgba(0,0,0,0.08);">
+                    <h3 style="color: var(--primary); margin-bottom: 1rem;">Creator Licensing</h3>
+                    <p>Tiered pricing model:</p>
+                    <ul style="padding-left: 1.5rem; margin-top: 1rem;">
+                        <li><strong>Individual License:</strong> $0.50-$2 for personal/educational use</li>
+                        <li><strong>Commercial License:</strong> $20-$150/year for business use</li>
+                        <li><strong>Institutional License:</strong> $500-$5,000/year for universities/museums</li>
+                    </ul>
+                </div>
+                
+                <div style="background-color: white; padding: 2rem; border-radius: 8px; box-shadow: 0 3px 10px rgba(0,0,0,0.08);">
+                    <h3 style="color: var(--primary); margin-bottom: 1rem;">NFT Secondary Royalties</h3>
+                    <p>5% perpetual on all resales with platform receiving 10% of royalty (0.5% of sale price)</p>
+                </div>
+                
+                <div style="background-color: white; padding: 2rem; border-radius: 8px; box-shadow: 0 3px 10px rgba(0,0,0,0.08);">
+                    <h3 style="color: var(--primary); margin-bottom: 1rem;">Marketplace Fees</h3>
+                    <p>2.5% fee on all trades with 1.5% to conservation fund and 1% to platform</p>
+                </div>
+            </div>
+            
+            <div style="background-color: white; padding: 2rem; border-radius: 8px; margin-top: 2rem; box-shadow: 0 3px 10px rgba(0,0,0,0.08);">
+                <h3 style="color: var(--primary); margin-bottom: 1rem;">Financial Projections</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Year</th>
+                            <th>Assets Tokenized</th>
+                            <th>Total Sales Volume</th>
+                            <th>Creator Royalties</th>
+                            <th>Conservation Fund</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Year 1</td>
+                            <td>500-1,000</td>
+                            <td>$10K-$50K</td>
+                            <td>$7K-$35K</td>
+                            <td>$2K-$10K</td>
+                        </tr>
+                        <tr>
+                            <td>Year 3</td>
+                            <td>10,000-50,000</td>
+                            <td>$500K-$3M</td>
+                            <td>$350K-$2.1M</td>
+                            <td>$100K-$600K</td>
+                        </tr>
+                        <tr>
+                            <td>Year 5</td>
+                            <td>50,000+</td>
+                            <td>$5M+</td>
+                            <td>$3.5M+</td>
+                            <td>$1M+</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- SDG Alignment Section -->
+    <section id="sdg" style="background-color: #f8f9fa;">
+        <div class="container">
+            <div class="section-header">
+                <h2>SDG Alignment Framework</h2>
+                <p>Integrated with JANI, UMOJA, and HISA Ecosystem for maximum impact</p>
+            </div>
+            
+            <div class="sdg-grid">
+                <div class="sdg-card">
+                    <h4>SDG 1: No Poverty</h4>
+                    <p>70% royalty distribution to creators with perpetual 5% on secondary sales. 60% of CHAT tokens dedicated to DAO-managed community fund.</p>
+                </div>
+                
+                <div class="sdg-card">
+                    <h4>SDG 4: Quality Education</h4>
+                    <p>Decentralized digital museum with free educational tier. CHAT Academy for digital preservation training. 500+ endangered languages documented as NFTs.</p>
+                </div>
+                
+                <div class="sdg-card">
+                    <h4>SDG 5: Gender Equality</h4>
+                    <p>50% gender representation requirement in validator councils. Women's economic independence through creator royalties and governance participation.</p>
+                </div>
+                
+                <div class="sdg-card">
+                    <h4>SDG 8: Decent Work & Economic Growth</h4>
+                    <p>Community ambassador program, content curators, validators, and developers. 70% income guarantee enforced by smart contracts.</p>
+                </div>
+                
+                <div class="sdg-card">
+                    <h4>SDG 13: Climate Action</h4>
+                    <p>Green blockchain architecture. 20% of every sale locked in conservation fund. Carbon-negative operations with environmental offsets.</p>
+                </div>
+                
+                <div class="sdg-card">
+                    <h4>SDG 17: Partnerships for the Goals</h4>
+                    <p>Strategic partnerships with UNESCO, universities, governments, NGOs, museums, and tech companies. Cross-ecosystem synergies with JANI, UMOJA, HISA.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Roadmap Section -->
+    <section id="roadmap">
+        <div class="container">
+            <div class="section-header">
+                <h2>Roadmap & Milestones</h2>
+                <p>Strategic implementation plan from MVP to global scale</p>
+            </div>
+            
+            <div style="position: relative; max-width: 800px; margin: 0 auto;">
+                <!-- Vertical line for timeline -->
+                <div style="position: absolute; left: 50%; transform: translateX(-50%); width: 3px; height: 100%; background-color: var(--primary);"></div>
+                
+                <!-- Phase 1 -->
+                <div style="display: flex; margin-bottom: 3rem; position: relative;">
+                    <div style="flex: 1; padding-right: 2rem; text-align: right;">
+                        <h3 style="color: var(--primary);">Phase 1: Foundation</h3>
+                        <p><strong>Months 1-3</strong></p>
+                        <p>MVP on Ethereum, pilot with 5 communities, 500 cultural assets for launch</p>
+                    </div>
+                    <div style="width: 20px; height: 20px; background-color: var(--primary); border-radius: 50%; position: absolute; left: 50%; transform: translateX(-50%); top: 10px;"></div>
+                    <div style="flex: 1; padding-left: 2rem;"></div>
+                </div>
+                
+                <!-- Phase 2 -->
+                <div style="display: flex; margin-bottom: 3rem; position: relative;">
+                    <div style="flex: 1; padding-right: 2rem;"></div>
+                    <div style="width: 20px; height: 20px; background-color: var(--primary); border-radius: 50%; position: absolute; left: 50%; transform: translateX(-50%); top: 10px;"></div>
+                    <div style="flex: 1; padding-left: 2rem;">
+                        <h3 style="color: var(--primary);">Phase 2: Expansion</h3>
+                        <p><strong>Months 4-9</strong></p>
+                        <p>Scale to Polygon, grow community, establish partnerships, mobile app launch</p>
+                    </div>
+                </div>
+                
+                <!-- Phase 3 -->
+                <div style="display: flex; margin-bottom: 3rem; position: relative;">
+                    <div style="flex: 1; padding-right: 2rem; text-align: right;">
+                        <h3 style="color: var(--primary);">Phase 3: Maturation</h3>
+                        <p><strong>Months 10-18</strong></p>
+                        <p>Activate ecotourism, launch DAO governance, reach 50K+ users</p>
+                    </div>
+                    <div style="width: 20px; height: 20px; background-color: var(--primary); border-radius: 50%; position: absolute; left: 50%; transform: translateX(-50%); top: 10px;"></div>
+                    <div style="flex: 1; padding-left: 2rem;"></div>
+                </div>
+                
+                <!-- Phase 4 -->
+                <div style="display: flex; position: relative;">
+                    <div style="flex: 1; padding-right: 2rem;"></div>
+                    <div style="width: 20px; height: 20px; background-color: var(--primary); border-radius: 50%; position: absolute; left: 50%; transform: translateX(-50%); top: 10px;"></div>
+                    <div style="flex: 1; padding-left: 2rem;">
+                        <h3 style="color: var(--primary);">Phase 4: Global Scale</h3>
+                        <p><strong>Months 19+</strong></p>
+                        <p>Connect diaspora communities, integrate with metaverse, expand beyond Africa</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>CHAT Platform</h3>
+                    <p>Africa's first decentralized cultural heritage NFT marketplace, preserving, protecting, monetizing, and celebrating African cultural assets.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#vision">Vision & Values</a></li>
+                        <li><a href="#architecture">Technical Architecture</a></li>
+                        <li><a href="#tokenomics">Tokenomics</a></li>
+                        <li><a href="#revenue">Revenue Model</a></li>
+                        <li><a href="#sdg">SDG Alignment</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <ul class="footer-links">
+                        <li>Email: hello@chat-platform.io</li>
+                        <li>Forum: chat-platform.io/forum</li>
+                        <li>Twitter: @CHAT_Heritage</li>
+                        <li>Discord: chat.community</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2024 CHAT Platform. All rights reserved. | Bringing Cultural Heritage to Life</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple mobile menu toggle
+        document.querySelector('.mobile-menu').addEventListener('click', function() {
+            document.querySelector('.nav-links').style.display = 
+                document.querySelector('.nav-links').style.display === 'flex' ? 'none' : 'flex';
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    if(window.innerWidth <= 768) {
+                        document.querySelector('.nav-links').style.display = 'none';
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html> 

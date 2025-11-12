@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHAT Token - NFT Museum Marketplace</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 50px;
+            animation: slideDown 0.6s ease-out;
+        }
+
+        header h1 {
+            font-size: 3.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        header p {
+            font-size: 1.3em;
+            opacity: 0.95;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        .card h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-icon {
+            font-size: 2em;
+        }
+
+        .card p {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .highlight {
+            background: #f0f4ff;
+            padding: 15px;
+            border-left: 4px solid #667eea;
+            border-radius: 5px;
+            margin: 15px 0;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .benefit-list {
+            list-style: none;
+            margin: 15px 0;
+        }
+
+        .benefit-list li {
+            padding: 8px 0;
+            color: #555;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .benefit-list li:before {
+            content: "✓";
+            color: #667eea;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .section {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .section h2 {
+            color: #667eea;
+            font-size: 2.2em;
+            margin-bottom: 25px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 15px;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .comparison-table th {
+            background: #667eea;
+            color: white;
+            font-weight: 600;
+        }
+
+        .comparison-table tr:hover {
+            background: #f9f9f9;
+        }
+
+        .tier {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 10px 0;
+        }
+
+        .tier-badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9em;
+        }
+
+        .bronze { background: #CD7F32; color: white; }
+        .silver { background: #C0C0C0; color: #333; }
+        .gold { background: #FFD700; color: #333; }
+        .platinum { background: #E5E4E2; color: #333; }
+
+        .feature-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .feature-item {
+            background: linear-gradient(135deg, #667eea15, #764ba215);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+
+        .feature-item h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .feature-item p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .apy-box {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            text-align: center;
+        }
+
+        .apy-box .amount {
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .apy-box .label {
+            font-size: 0.95em;
+            opacity: 0.9;
+        }
+
+        footer {
+            text-align: center;
+            color: white;
+            margin-top: 60px;
+            padding: 30px;
+            opacity: 0.9;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.2em;
+            }
+
+            .section {
+                padding: 20px;
+            }
+
+            .comparison-table th,
+            .comparison-table td {
+                padding: 10px;
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>💎 CHAT Token</h1>
+            <p>The Native Utility Token of NFT Museum Marketplace</p>
+        </header>
+
+        <div class="grid">
+            <div class="card">
+                <h2><span class="card-icon">🎯</span>What is CHAT?</h2>
+                <p>CHAT is the utility token that powers the NFT Museum Marketplace ecosystem on Ethereum. It unifies the marketplace economy, provides fee discounts, enables staking rewards, and gives holders governance rights over platform decisions.</p>
+                <div class="highlight">
+                    <strong>Total Supply:</strong> 1 Billion CHAT tokens (capped, no inflation)
+                </div>
+            </div>
+
+            <div class="card">
+                <h2><span class="card-icon">📊</span>Token Distribution</h2>
+                <p>CHAT was distributed strategically to align incentives across the ecosystem:</p>
+                <ul class="benefit-list">
+                    <li>40% Community (airdrops, rewards)</li>
+                    <li>30% Team (4-year vest)</li>
+                    <li>30% Treasury (DAO controlled)</li>
+                </ul>
+                <div class="highlight">
+                    Launch price: $0.10 per CHAT
+                </div>
+            </div>
+
+            <div class="card">
+                <h2><span class="card-icon">⚡</span>Core Purpose</h2>
+                <p>CHAT creates alignment between all participants:</p>
+                <ul class="benefit-list">
+                    <li>Reward user participation</li>
+                    <li>Incentivize platform trading</li>
+                    <li>Enable community governance</li>
+                    <li>Support platform sustainability</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>💰 Fee Discount Mechanism</h2>
+            <p>CHAT holders get direct savings on every transaction. Pay your marketplace fees in CHAT instead of ETH and automatically receive a 2% discount:</p>
+            
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Transaction Type</th>
+                        <th>ETH Payment Fee</th>
+                        <th>CHAT Payment Fee</th>
+                        <th>Your Savings</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>NFT Purchase</td>
+                        <td>5%</td>
+                        <td>3%</td>
+                        <td><strong>2%</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Auction Win</td>
+                        <td>5%</td>
+                        <td>3%</td>
+                        <td><strong>2%</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Bundle Sale</td>
+                        <td>5%</td>
+                        <td>3%</td>
+                        <td><strong>2%</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="highlight">
+                <strong>Example:</strong> Buy an NFT for 10 ETH with CHAT payment = 0.3 CHAT fee vs. 0.5 ETH fee. You save 2% on every purchase!
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🏆 Loyalty Tiers & Extra Rewards</h2>
+            <p>Hold more CHAT and unlock increasing fee discounts at each tier:</p>
+            
+            <div class="feature-showcase">
+                <div class="feature-item">
+                    <h3><span class="tier-badge bronze">Bronze</span></h3>
+                    <p><strong>1,000+ CHAT</strong></p>
+                    <p>2% fee discount</p>
+                </div>
+                <div class="feature-item">
+                    <h3><span class="tier-badge silver">Silver</span></h3>
+                    <p><strong>10,000+ CHAT</strong></p>
+                    <p>3% fee discount (+1%)</p>
+                </div>
+                <div class="feature-item">
+                    <h3><span class="tier-badge gold">Gold</span></h3>
+                    <p><strong>100,000+ CHAT</strong></p>
+                    <p>4% fee discount (+2%)</p>
+                </div>
+                <div class="feature-item">
+                    <h3><span class="tier-badge platinum">Platinum</span></h3>
+                    <p><strong>1,000,000+ CHAT</strong></p>
+                    <p>5% fee discount (maximum)</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📈 Staking & Yield Farming</h2>
+            <p>Earn passive income by staking your CHAT tokens. Choose your earning strategy:</p>
+
+            <div class="feature-showcase">
+                <div class="feature-item">
+                    <h3>💧 Liquidity Provider Staking</h3>
+                    <p>Deposit equal values of ETH and CHAT into Uniswap pairs</p>
+                    <div class="apy-box">
+                        <div class="amount">15-25%</div>
+                        <div class="label">Average Annual Yield</div>
+                    </div>
+                    <p>Earn fees from every CHAT trade + LP rewards</p>
+                </div>
+
+                <div class="feature-item">
+                    <h3>🗳️ Governance Staking</h3>
+                    <p>Lock CHAT to vote on marketplace proposals</p>
+                    <div class="apy-box">
+                        <div class="amount">5-10%</div>
+                        <div class="label">Base APY</div>
+                    </div>
+                    <p>Higher rewards for longer lock periods (up to 12%)</p>
+                </div>
+
+                <div class="feature-item">
+                    <h3>🎁 Creator Rewards</h3>
+                    <p>Share in marketplace success through incentive pools</p>
+                    <div class="apy-box">
+                        <div class="amount">Varies</div>
+                        <div class="label">Based on Activity</div>
+                    </div>
+                    <p>Earn extra CHAT for creating and trading</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🏛️ Governance & Community Control</h2>
+            <p>CHAT holders collectively control the marketplace through democratic voting:</p>
+
+            <div class="feature-showcase">
+                <div class="feature-item">
+                    <h3>Voting Power</h3>
+                    <p>1 CHAT token = 1 vote on all proposals</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Vote On</h3>
+                    <p>Fee structures, features, treasury allocation, emergency procedures</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Requirements</h3>
+                    <p>50% quorum, 66% supermajority needed to pass</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Execution</h3>
+                    <p>7-day voting period, 2-day timelock for security</p>
+                </div>
+            </div>
+
+            <div class="highlight">
+                <strong>No middlemen:</strong> Direct community control with transparent on-chain voting and execution
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>💳 Creator Royalty Payments</h2>
+            <p>CHAT serves as the primary settlement currency for creator royalties, creating alignment between creators and the ecosystem:</p>
+
+            <div class="apy-box">
+                <p style="margin-bottom: 10px;">When collectors purchase NFTs, creators receive royalties paid in CHAT</p>
+                <p style="opacity: 0.9;">Artists benefit from CHAT appreciation while creating sustainable income streams</p>
+            </div>
+
+            <ul class="benefit-list" style="margin-top: 20px;">
+                <li>5-10% automatic royalty on every resale (forever)</li>
+                <li>Paid instantly in CHAT to creator wallet</li>
+                <li>Streaming payment option for consistent income</li>
+                <li>Tax reporting dashboard for accounting</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>🔥 Deflationary Mechanics</h2>
+            <p>CHAT is designed to increase in value over time through multiple mechanisms:</p>
+
+            <div class="feature-showcase">
+                <div class="feature-item">
+                    <h3>Token Burn</h3>
+                    <p>10% of platform fees repurchase and burn CHAT, permanently removing supply from circulation</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Increasing Demand</h3>
+                    <p>More traders = more CHAT fees paid = more tokens burned = less supply</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Staking Lock-up</h3>
+                    <p>Millions of CHAT locked in staking = reduced circulating supply</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Price Support</h3>
+                    <p>Treasury buyback fund supports price during downturns</p>
+                </div>
+            </div>
+
+            <div class="highlight">
+                <strong>Result:</strong> As marketplace grows, CHAT supply decreases while demand increases, creating natural price appreciation for long-term holders
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🚀 Getting Started with CHAT</h2>
+
+            <div class="feature-showcase">
+                <div class="feature-item">
+                    <h3>1️⃣ Acquire CHAT</h3>
+                    <p>Purchase CHAT from Uniswap or earn through marketplace rewards and NFT creation</p>
+                </div>
+                <div class="feature-item">
+                    <h3>2️⃣ Choose Your Strategy</h3>
+                    <p>Fee discounts, staking, farming, or governance participation</p>
+                </div>
+                <div class="feature-item">
+                    <h3>3️⃣ Monitor Rewards</h3>
+                    <p>Dashboard tracks all earnings, yields, and CHAT balance</p>
+                </div>
+                <div class="feature-item">
+                    <h3>4️⃣ Participate</h3>
+                    <p>Vote on governance proposals and shape marketplace evolution</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>✨ Why CHAT Matters</h2>
+
+            <ul class="benefit-list">
+                <li>Direct alignment: Your interest = platform's interest</li>
+                <li>Real utility: Use CHAT for actual fee discounts</li>
+                <li>Community control: Vote on every major decision</li>
+                <li>Passive income: Earn 5-25% APY from staking</li>
+                <li>Price appreciation: Deflationary mechanics support long-term growth</li>
+                <li>Transparent: All fees and treasury allocation visible on-chain</li>
+                <li>Non-custodial: You control your CHAT tokens in your wallet</li>
+            </ul>
+        </div>
+
+        <footer>
+            <p>🎨 NFT Museum Marketplace | Powered by Ethereum & Hedera Consensus Service</p>
+            <p style="margin-top: 15px; opacity: 0.8;">CHAT Token: Unifying the Creator Economy</p>
+        </footer>
+    </div>
+</body>
+</html>

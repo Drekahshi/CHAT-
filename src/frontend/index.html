@@ -1,1 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHAT - Cultural Heritage NFT Marketplace</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
+<!-- SIDEBAR NAVIGATION -->
+<aside id="sidebar">
+    <div class="logo">
+        <h1>CHAT</h1>
+        <p>Cultural Heritage NFT Museum Marketplace </p>
+    </div>
+    <nav>
+        <a href="#dashboard" class="nav-link active">
+            <i class="fas fa-chart-line"></i>
+            <span>Dashboard</span>
+        </a>
+        <a href="#explore" class="nav-link">
+            <i class="fas fa-search"></i>
+            <span>Explore</span>
+        </a>
+        <a href="#create" class="nav-link" onclick="openModal('forge')">
+            <i class="fas fa-plus-circle"></i>
+            <span>Create</span>
+        </a>
+        <a href="#collection" class="nav-link">
+            <i class="fas fa-briefcase"></i>
+            <span>My Collection</span>
+        </a>
+        <a href="#activity" class="nav-link">
+            <i class="fas fa-bolt"></i>
+            <span>Activity</span>
+        </a>
+        <hr>
+        <a href="index2.html" class="nav-link">
+            <i class="fas fa-chart-pie"></i>
+            <span>Tokenomics</span>
+        </a>
+        <a href="#rewards" class="nav-link">
+            <i class="fas fa-gift"></i>
+            <span>Rewards</span>
+        </a>
+    </nav>
+    <div class="sidebar-footer">
+        <a href="#settings">
+            <i class="fas fa-cog"></i>
+            <span>Settings</span>
+        </a>
+    </div>
+</aside>
+
+<!-- MAIN CONTENT -->
+<main>
+    <!-- HEADER -->
+    <header>
+        <div class="header-left">
+            <input type="text" placeholder="Search cultural artifacts, NFTs..." id="searchInput">
+            <select id="chainSelect">
+                <option>All Chains</option>
+                <option>Ethereum</option>
+                <option>Hedera</option>
+                <option>Polygon</option>
+            </select>
+        </div>
+        <div class="header-right">
+            <!-- DApp link button (opens in a new tab) -->
+            <a class="dapp-btn" id="dappBtn" href="https://9000-firebase-studio-1762179444474.cluster-cbeiita7rbe7iuwhvjs5zww2i4.cloudworkstations.dev" target="_blank" rel="noopener noreferrer">
+                <i class="fas fa-rocket"></i>
+                Open DApp
+            </a>
+            <button class="connect-wallet" id="walletBtn">
+                <i class="fas fa-wallet"></i>
+                Connect Wallet
+            </button>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero" id="dashboard">
+        <div class="hero-content">
+            <h1>Preserve Global Heritage on Blockchain</h1>
+            <p>Explore, mint, and trade cultural heritage NFTs across multiple blockchains</p>
+            <button class="cta-button" onclick="document.getElementById('explore').scrollIntoView({behavior: 'smooth'})">Start Exploring</button>
+        </div>
+    </section>
+
+    <!-- FEATURED COLLECTIONS -->
+    <section class="featured">
+        <h2>Featured Cultural Collections</h2>
+        <div class="collections-carousel">
+            <div class="collection-card">
+                <img src="https://images.unsplash.com/photo-1578303512597-81e6cc155b3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Ancient Artifacts">
+                <h3>Ancient Artifacts</h3>
+                <p class="collection-stat">
+                    <span>Floor: 2.5 HBAR</span>
+                    <span class="volume">Volume: 125K HBAR</span>
+                </p>
+                <button>View Collection</button>
+            </div>
+            <div class="collection-card">
+                <img src="https://images.unsplash.com/photo-1544787219-7f47ccb76574?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Asian Heritage">
+                <h3>Asian Heritage</h3>
+                <p class="collection-stat">
+                    <span>Floor: 1.2 HBAR</span>
+                    <span class="volume">Volume: 89K HBAR</span>
+                </p>
+                <button>View Collection</button>
+            </div>
+            <div class="collection-card">
+                <img src="https://images.unsplash.com/photo-1587734195503-904fca47e0e9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="European History">
+                <h3>European History</h3>
+                <p class="collection-stat">
+                    <span>Floor: 5.8 HBAR</span>
+                    <span class="volume">Volume: 256K HBAR</span>
+                </p>
+                <button>View Collection</button>
+            </div>
+            <div class="collection-card">
+                <img src="https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="African Culture">
+                <h3>African Culture</h3>
+                <p class="collection-stat">
+                    <span>Floor: 12.3 HBAR</span>
+                    <span class="volume">Volume: 512K HBAR</span>
+                </p>
+                <button>View Collection</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- TRENDING NOW -->
+    <section class="trending">
+        <h2>Trending Cultural Artifacts</h2>
+        <div class="trending-grid">
+            <div class="trending-card">
+                <div class="trending-rank">1</div>
+                <img src="https://images.unsplash.com/photo-1578303512597-81e6cc155b3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Pharaoh Mask">
+                <div class="trending-info">
+                    <h4>Pharaoh Mask</h4>
+                    <p class="creator">by @egyptian_heritage</p>
+                    <div class="trending-stats">
+                        <span class="floor">Floor: 3.2 HBAR</span>
+                        <span class="change-up">+45.2%</span>
+                    </div>
+                </div>
+                <button class="bid-btn" onclick="buyNFT(1, 'crypto')">Place Bid</button>
+            </div>
+            <div class="trending-card">
+                <div class="trending-rank">2</div>
+                <img src="https://images.unsplash.com/photo-1544787219-7f47ccb76574?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Ming Vase">
+                <div class="trending-info">
+                    <h4>Ming Vase</h4>
+                    <p class="creator">by @chinese_culture</p>
+                    <div class="trending-stats">
+                        <span class="floor">Floor: 1.8 HBAR</span>
+                        <span class="change-up">+32.1%</span>
+                    </div>
+                </div>
+                <button class="bid-btn" onclick="buyNFT(2, 'crypto')">Place Bid</button>
+            </div>
+            <div class="trending-card">
+                <div class="trending-rank">3</div>
+                <img src="https://images.unsplash.com/photo-1587734195503-904fca47e0e9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Viking Shield">
+                <div class="trending-info">
+                    <h4>Viking Shield</h4>
+                    <p class="creator">by @norse_history</p>
+                    <div class="trending-stats">
+                        <span class="floor">Floor: 2.1 HBAR</span>
+                        <span class="change-up">+28.5%</span>
+                    </div>
+                </div>
+                <button class="bid-btn" onclick="buyNFT(3, 'crypto')">Place Bid</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAIN NFT MARKETPLACE GRID -->
+    <section class="marketplace" id="explore">
+        <div class="marketplace-header">
+            <h2>Browse Cultural Heritage NFTs</h2>
+            <div class="view-options">
+                <button class="view-btn active">
+                    <i class="fas fa-th"></i> Grid
+                </button>
+                <button class="view-btn">
+                    <i class="fas fa-list"></i> List
+                </button>
+            </div>
+        </div>
+
+        <!-- FILTER SIDEBAR -->
+        <div class="marketplace-container">
+            <aside class="filter-sidebar" id="filterSidebar">
+                <h3>Filters</h3>
+                
+                <div class="filter-group">
+                    <label>
+                        <input type="checkbox"> Verified Only
+                    </label>
+                </div>
+
+                <div class="filter-group">
+                    <h4>Price Range</h4>
+                    <input type="range" min="0" max="100" value="50">
+                    <p>0 - 100 HBAR</p>
+                </div>
+
+                <div class="filter-group">
+                    <h4>Collections</h4>
+                    <label><input type="checkbox"> Egyptian</label>
+                    <label><input type="checkbox"> Chinese</label>
+                    <label><input type="checkbox"> Norse</label>
+                    <label><input type="checkbox"> African</label>
+                </div>
+
+                <div class="filter-group">
+                    <h4>Rarity</h4>
+                    <label><input type="checkbox"> Common</label>
+                    <label><input type="checkbox"> Rare</label>
+                    <label><input type="checkbox"> Epic</label>
+                    <label><input type="checkbox"> Legendary</label>
+                </div>
+
+                <div class="filter-group">
+                    <h4>Blockchain</h4>
+                    <label><input type="checkbox" checked> Hedera</label>
+                    <label><input type="checkbox"> Ethereum</label>
+                    <label><input type="checkbox"> Polygon</label>
+                </div>
+
+                <button class="reset-filters">Reset Filters</button>
+            </aside>
+
+            <!-- NFT GRID -->
+            <div class="nft-grid" id="nftGrid">
+                <!-- NFTs will be dynamically loaded here -->
+            </div>
+        </div>
+
+        <!-- PAGINATION -->
+        <div class="pagination">
+            <button>← Previous</button>
+            <button class="active">1</button>
+            <button>2</button>
+            <button>3</button>
+            <button>...</button>
+            <button>Next →</button>
+        </div>
+    </section>
+
+    <!-- MY COLLECTION SECTION -->
+    <section class="marketplace" id="collection">
+        <div class="marketplace-header">
+            <h2>My Cultural Heritage Collection</h2>
+            <button class="connect-wallet" onclick="openModal('forge')">
+                <i class="fas fa-plus"></i> Create New NFT
+            </button>
+        </div>
+        <div class="nft-grid" id="collectionGrid">
+            <!-- User's NFTs will be dynamically loaded here -->
+        </div>
+    </section>
+
+    <!-- TOKENOMICS SECTION -->
+    <section class="stats" id="tokenomics">
+        <h2>Tokenomics Overview</h2>
+        <div class="stats-grid" id="statsGrid">
+            <!-- Stats will be dynamically loaded here -->
+        </div>
+    </section>
+
+    <!-- REWARDS SECTION -->
+    <section class="stats" id="rewards">
+        <h2>$CHAT Rewards & Perks</h2>
+        <div class="rewards-grid" id="rewardsGrid">
+            <!-- Rewards will be dynamically loaded here -->
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>About CHAT</h4>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Careers</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Community</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Cookie Policy</a></li>
+                    <li><a href="#">Disclaimer</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Follow Us</h4>
+                <div class="social-links">
+                    <a href="#">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#">
+                        <i class="fab fa-discord"></i>
+                    </a>
+                    <a href="#">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="#">
+                        <i class="fab fa-telegram"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 CHAT - Cultural Heritage Tokens. All rights reserved. Preserving global heritage on blockchain.</p>
+        </div>
+    </footer>
+</main>
+
+<!-- ===== WALLET MODAL ===== -->
+<div class="modal" id="walletModal">
+    <div class="modal-content">
+        <button class="modal-close" onclick="closeModal('wallet')">&times;</button>
+        <h2>Connect Your Wallet</h2>
+        <p>Choose your preferred wallet provider:</p>
+        <button class="modal-btn" onclick="connectWallet('metamask')">🦊 MetaMask</button>
+        <br><br>
+        <button class="modal-btn" onclick="connectWallet('hashpack')">🔐 HashPack</button>
+        <br><br>
+        <button class="modal-btn" onclick="connectWallet('walletconnect')">🌐 WalletConnect</button>
+    </div>
+</div>
+
+<!-- ===== FORGE MODAL ===== -->
+<div class="modal" id="forgeModal">
+    <div class="modal-content">
+        <button class="modal-close" onclick="closeModal('forge')">&times;</button>
+        <h2>Heritage Forge</h2>
+        <p>Mint your cultural heritage NFT:</p>
+        
+        <div class="file-upload">
+            <input type="file" id="nftImage" class="file-upload-input" accept="image/*">
+            <label for="nftImage" class="file-upload-label">
+                <div class="file-upload-icon">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                </div>
+                <span>Click to upload your artifact image</span>
+            </label>
+        </div>
+        
+        <div class="image-preview" id="imagePreview">
+            <img id="previewImg" src="" alt="Preview">
+        </div>
+        
+        <input class="modal-input" type="text" id="nftName" placeholder="Artifact Name">
+        <input class="modal-input" type="text" id="nftDescription" placeholder="Description">
+        <input class="modal-input" type="number" id="nftPrice" placeholder="Price (HBAR)">
+        
+        <div class="chain-toggle" style="margin-bottom: 1rem;">
+            <button class="chain-btn active" data-chain="eth">ETH</button>
+            <button class="chain-btn" data-chain="poly">POLY</button>
+            <button class="chain-btn" data-chain="hedera">HED</button>
+        </div>
+        
+        <button class="modal-btn" onclick="createNFT()">🎨 Mint NFT</button>
+    </div>
+</div>
+
+<!-- ===== TOAST NOTIFICATION ===== -->
+<div class="toast" id="toast"></div>
+
+<script src="script.js"></script>
+</main>
+
+</body>
+</html>
